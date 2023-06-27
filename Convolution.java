@@ -9,7 +9,7 @@ public class Convolution {
          * @param B
          * @return
          */
-        public static int[][] Convolve(double[][] A, double[][] B) {
+        public static int[][] Convolve(float[][] A, int[][] B) {
             int width = B.length;
             int height = B[0].length;
 
