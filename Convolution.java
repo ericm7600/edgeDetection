@@ -12,12 +12,10 @@ public class Convolution {
         public static int[][] Convolve(float[][] A, int[][] B) {
             int width = B.length;
             int height = B[0].length;
-
             //size of the kernel
             int size = A.length;
 
             int step = size / 2;
-
             int[][] out = new int[width][height];
 
             for (int i = 0; i < width; i++) {
