@@ -1,7 +1,6 @@
 package edgeDetection;
 
 public class Convolution {
-    public static class Convolve {
 
         /** Static class to perform convolution operations
          * A must be a square matrix with an odd number of entries (origin must be in the middle)
@@ -10,9 +9,9 @@ public class Convolution {
          * @param B
          * @return
          */
-        public int[][] Convolve(int[][] A, int[][] B) {
-            int width = B[0].length;
-            int height = B.length;
+        public static int[][] Convolve(double[][] A, double[][] B) {
+            int width = B.length;
+            int height = B[0].length;
 
             //size of the kernel
             int size = A.length;
@@ -44,14 +43,8 @@ public class Convolution {
                     out[i][j] = accumulator;
                 }
             }
-
-
-
-
-
             return out;
         }
-    }
 }
 
 
