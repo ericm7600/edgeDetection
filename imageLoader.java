@@ -3,6 +3,7 @@ package edgeDetection;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,6 +16,8 @@ import java.io.IOException;
 public class imageLoader {
 
     BufferedImage img;
+    int width;
+    int height;
 
     public imageLoader(String path){
         try {
@@ -22,6 +25,8 @@ public class imageLoader {
         } catch (IOException e) {
 
         }
+        width = img.getWidth();
+        height = img.getHeight();
     }
 
     private BufferedImage convertToGrayScale(BufferedImage image){
@@ -48,8 +53,15 @@ public class imageLoader {
 
     public double[][] getMatrix(){
         BufferedImage greyScale = greyScaleImage();
+        //convert grayscale BufferedImage into 1-D array
+        byte[] image = ((DataBufferByte) greyScaleImage().getRaster().getDataBuffer()).getData();
+        //allocate 2-D array, then populate fill it
+        double[][] out = new double[width][height];
 
-        return null;
+        for(int i = 0; i < image.length; i++) {
+            out[i % width][i % height] = image[i];
+        }
+        return out;
     }
 
 }
