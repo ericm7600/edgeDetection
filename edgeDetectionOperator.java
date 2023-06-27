@@ -59,7 +59,7 @@ abstract class edgeDetectionOperator {
                 if (T <= pi / 8 || T >= 7 * pi / 8) {
                     theta[i][j] = 1;
                 }
-                
+
                 if (T > pi / 8 && T <= 3 * pi / 8) {
                     theta[i][j] = 4;
                 }
@@ -74,5 +74,46 @@ abstract class edgeDetectionOperator {
             }
         }
         return theta;
+    }
+
+    public int[][] getThinnedEdges(int[][] image) {
+        int[][] G = getG(image);
+        int[][] theta = getTheta(image);
+
+        int width = image.length;
+        int height = image[0].length;
+
+        int[][] thinned = new int[width][height];
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int g = G[i][j];
+
+                switch (theta[i][j]) {
+                    case 1:
+                        if (!(g > G[Math.max(0, i - 1)][j] && g > G[Math.min(width - 1, i + 1)][j])) {
+                            G[i][j] = 0;
+                        }
+                        break;
+                    case 2:
+                        if (!(g > G[Math.max(0, i - 1)][Math.max(0, j - 1)] && g > G[Math.min(width - 1, i + 1)][Math.min(height - 1, j + 1)])) {
+                            G[i][j] = 0;
+                        }
+                        break;
+                    case 3:
+                        if (!(g > G[i][Math.max(0, j - 1)] && g > G[i][Math.min(height - 1, j + 1)])) {
+                            G[i][j] = 0;
+                        }
+                        break;
+                    case 4:
+                        if (!(g > G[Math.min(width - 1, i + 1)][Math.max(0, j - 1)] && g > G[Math.max(0, i - 1)][Math.min(height - 1, j + 1)])) {
+                            G[i][j] = 0;
+                        }
+                        break;
+                }
+            }
+        }
+
+        return G;
     }
 }
