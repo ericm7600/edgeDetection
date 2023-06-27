@@ -1,7 +1,7 @@
 package edgeDetection;
 import static edgeDetection.Convolution.Convolve;
 
-public class Sobel {
+public class Sobel extends edgeDetectionOperator{
 
     final float[][] Sx = {{1, 0, -1},
                         {2, 0, -2},
