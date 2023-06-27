@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /** This class
  * 1. loads an image from the disk
@@ -51,15 +52,31 @@ public class imageLoader {
         return convertToGrayScale(img);
     }
 
-    public double[][] getMatrix(){
+    public int[][] getMatrix(){
         BufferedImage greyScale = greyScaleImage();
         //convert grayscale BufferedImage into 1-D array
-        byte[] image = ((DataBufferByte) greyScaleImage().getRaster().getDataBuffer()).getData();
-        //allocate 2-D array, then populate fill it
-        double[][] out = new double[width][height];
+        byte[] image = ((DataBufferByte) greyScale.getRaster().getDataBuffer()).getData();
 
-        for(int i = 0; i < image.length; i++) {
-            out[i % width][i % height] = image[i];
+        //allocate 2-D array, then populate it with the values from the image
+        int[][] out = new int[width][height];
+        int row = 0;
+        int col = 0;
+        for(int i = 0; i < width * height; i++) {
+            int pixel = image[i];
+
+            if (pixel < 0) {
+                pixel += 256;
+            }
+
+            out[col][row] = pixel;
+            col++;
+
+            if(col >= width) {
+                col = 0;
+                row += 1;
+            }
+
+
         }
         return out;
     }
