@@ -14,7 +14,7 @@ public class Gaussian {
         }
     }
 
-    public float[][] H() {
+    public float[][] getKernel() {
         return H;
     }
 }
