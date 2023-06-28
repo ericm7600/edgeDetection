@@ -83,7 +83,6 @@ abstract class edgeDetectionOperator {
         int width = image.length;
         int height = image[0].length;
 
-        int[][] thinned = new int[width][height];
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
