@@ -19,11 +19,11 @@ public class testSobel {
         Sobel s = new Sobel();
         int[][] matrix = loader.getMatrix();
 
-        gaussian.Gaussian g = new gaussian.Gaussian(2, 1.4);
+        gaussian.Gaussian g = new gaussian.Gaussian(2, 1);
         float[][] H = g.H();
 
         int[][] blurred = Convolve(H, matrix);
-        int[][] out = s.getG(blurred);
+        int[][] out = s.getThinnedEdges(blurred);
 
         int xLength = out.length;
         int yLength = out[0].length;

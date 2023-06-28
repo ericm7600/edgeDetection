@@ -42,6 +42,9 @@ public class Otsu {
                 u1 += histogram.get(i) * i;
             }
 
+            if (count0 == 0 || count1 == 0) {
+                continue;
+            }
             u0 = u0 / count0;
             u1 = u1 / count1;
             float w0 = count0 / mn;
@@ -59,7 +62,7 @@ public class Otsu {
      * @return
      */
     private static Map<Integer, Integer> histogram(int[][] image) {
-        Stream<Integer> values = (Stream<Integer>) Arrays.stream(image).flatMapToInt(Arrays::stream);
+        Stream<Integer> values = Arrays.stream(image).flatMapToInt(Arrays::stream).boxed();
 
         return values.collect(groupingBy(Integer::intValue, Collectors.collectingAndThen(Collectors.counting(), Long::intValue)));
     }
