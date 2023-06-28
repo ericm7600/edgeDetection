@@ -19,7 +19,11 @@ public class Otsu {
      */
     public static int threshold(int[][] image) {
         Map<Integer, Integer> histogram = histogram(image);
-        double mn = image.length * image[0].length;
+
+        //setting the count of 0-brightness pixels to zero, so as not to skew the threshold.
+        int countZero = histogram.remove(0);
+        //subtract countZero from the total number of pixels in the image
+        double mn = image.length * image[0].length - countZero;
         /** Iterate over keys of histogram, considering each key as a threshold value.
          * For each threshold value, compute the fraction of pixels above and below those values (w0 and w1).
          * Then compute the means of each class (u0 and u1).
