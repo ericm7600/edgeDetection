@@ -22,6 +22,7 @@ public class Otsu {
 
         //setting the count of 0-brightness pixels to zero, so as not to skew the threshold.
         int countZero = histogram.remove(0);
+
         //subtract countZero from the total number of pixels in the image
         double mn = image.length * image[0].length - countZero;
         /** Iterate over keys of histogram, considering each key as a threshold value.
