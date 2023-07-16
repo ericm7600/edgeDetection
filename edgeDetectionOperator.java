@@ -76,6 +76,14 @@ abstract class edgeDetectionOperator {
         return theta;
     }
 
+    /** Compare each gradient value with it's neighbors in
+     * the direction of the gradient at that point.
+     * Suppress the value if either neighbor is larger.
+     *
+     *
+     * @param image
+     * @return
+     */
     public int[][] getThinnedEdges(int[][] image) {
         int[][] G = getG(image);
         int[][] theta = getTheta(image);
